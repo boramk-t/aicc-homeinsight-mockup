@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AICC 통합 포털 · AICC Watchtower</title>
+  <link rel="stylesheet" href="funnel.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="gate.js"></script>
+</head>
+<body>
+
+<!-- GNB -->
+<nav class="gnb">
+  <div class="gnb-left">
+    <div class="service-switcher" id="switcherBtn" onclick="toggleSwitcher()">
+      <div class="gnb-logo">
+        <span class="logo-mark">A</span><span class="logo-aicc">AICC 통합 포털</span>
+      </div>
+      <span class="switcher-arrow">▾</span>
+      <div class="switcher-dropdown">
+        <div class="switcher-item" onclick="location.href='index.html'"><span class="status-dot green"></span> AI 상담어드바이저포털</div>
+        <div class="switcher-item"><span class="status-dot green"></span> AI AutoQA</div>
+        <div class="switcher-item"><span class="status-dot green"></span> AI V2A</div>
+        <div class="switcher-item"><span class="status-dot green"></span> AI 상담봇</div>
+        <div class="switcher-item"><span class="status-dot green"></span> 통합 운영관리포털</div>
+      </div>
+    </div>
+  </div>
+  <div class="gnb-right">
+    <div class="live-badge"><span class="live-dot"></span> LIVE</div>
+    <div class="gnb-icon-btn" title="알림"><span class="icon">🔔</span><span class="pulse-badge" id="alertBadge">0</span></div>
+    <div class="gnb-profile"><div class="avatar">김</div><span class="profile-name">김유플</span></div>
+  </div>
+</nav>
+
+<main class="main-content">
+
+  <!-- 브레드크럼 -->
+  <nav class="breadcrumb">
+    <span class="bc-home" onclick="location.href='index.html'">AICC 통합 포털</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-current">AICC Watchtower</span>
+  </nav>
+
+  <!-- 페이지 헤더 -->
+  <header class="page-header">
+    <div class="page-title-wrap">
+      <h1 class="page-title">🔭 AICC Watchtower</h1>
+      <p class="page-sub">전 서비스의 고객 여정·부하·품질·인프라를 실시간으로 감시하는 통합 관제 대시보드입니다.</p>
+    </div>
+    <div class="page-meta">
+      <span class="update-time" id="liveClock">🕒 --:--:--</span>
+    </div>
+  </header>
+
+  <!-- 1. 전체 시스템 상태 신호등 -->
+  <section class="status-banner" id="statusBanner">
+    <div class="sb-left">
+      <span class="sb-signal" id="sbSignal"></span>
+      <div>
+        <div class="sb-title" id="sbTitle">시스템 정상 운영 중</div>
+        <div class="sb-sub" id="sbSub">모든 서비스가 정상 범위에서 동작하고 있습니다.</div>
+      </div>
+    </div>
+    <div class="sb-right" id="sbMetrics"><!-- JS --></div>
+  </section>
+
+  <!-- 2. 고객 여정 · 실시간 부하 -->
+  <section class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">고객 여정 · 실시간 부하</h2>
+    </div>
+    <div class="dash-flow" id="dashFlow"><!-- JS --></div>
+    <div class="journey-legend">
+      <span class="jl-item"><i class="load-dot normal"></i> 정상</span>
+      <span class="jl-item"><i class="load-dot warn"></i> 주의 (부하 150%↑ / 특정 집중)</span>
+      <span class="jl-item"><i class="load-dot crit"></i> 위험 (부하 200%↑ / 지연·장애)</span>
+    </div>
+  </section>
+
+  <!-- 2-1. 예측 레인 (Measurement vs Predictive) -->
+  <section class="panel forecast-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">실시간 측정 vs 근미래 예측</h2>
+      <div class="seg-control small" id="horizonSeg">
+        <button class="seg-btn active" data-h="10">+10분</button>
+        <button class="seg-btn" data-h="30">+30분</button>
+      </div>
+    </div>
+    <div class="forecast-grid" id="forecastGrid"><!-- JS --></div>
+    <div class="forecast-reco" id="forecastReco"><!-- JS --></div>
+  </section>
+
+  <!-- 3. 실시간 이상 알림 (여정 바로 아래) -->
+  <section class="panel watch-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">실시간 이상 알림</h2>
+      <span class="insight-count" id="watchCount">0건</span>
+    </div>
+    <div class="watch-list" id="watchList"><!-- JS --></div>
+  </section>
+
+  <!-- 4. 종료 비율 + AutoQA -->
+  <section class="quality-row">
+    <div class="panel end-panel">
+      <div class="panel-header"><h2 class="panel-title">상담 종료 비율</h2></div>
+      <div class="end-bars" id="endBars"><!-- JS --></div>
+    </div>
+    <div class="panel quality-panel">
+      <div class="panel-header"><h2 class="panel-title">AutoQA 상담사 품질점수</h2></div>
+      <div class="gauge" id="qaGauge"></div>
+      <div class="quality-sub">AI AutoQA가 평가한 상담 품질 평균 (0~100)</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="dashboard.js"></script>
+</body>
+</html>
